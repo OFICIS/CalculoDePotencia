@@ -75,7 +75,7 @@ function createNodeInput (numberCreate) {
      let sectionContainer = document.getElementById('section-container');
      const texto = document.getElementById('texto');
      texto.innerHTML = '';
-     if (numberCreate === 1 || numberCreate === 2 || numberCreate === 3 ) {
+     
          for (let i = 1; i <= numberCreate; i++) {
              const div1 = document.createElement('div');
              const input = document.createElement('input');
@@ -84,7 +84,7 @@ function createNodeInput (numberCreate) {
              label.classList.add('label');
              input.setAttribute('id', `baterias${i}`);
              input.setAttribute('type', 'number');
-             const textLabel1 = document.createTextNode(`# Baterias`);
+             const textLabel1 = document.createTextNode(`#B. Baterias`);
              label.appendChild(textLabel1);
              div1.appendChild(input);
              div1.appendChild(label);
@@ -110,55 +110,59 @@ function createNodeInput (numberCreate) {
      
          if (numberCreate === 1) {
              button.addEventListener('click', potencias1);
-         } else if (numberCreate === 2) {
+         } 
+         if (numberCreate === 2) {
              button.addEventListener('click', potencias2);
-         } else if (numberCreate === 3) {
+         } 
+         if (numberCreate === 3) {
              button.addEventListener('click', potencias3);
-        } else {
-        texto.innerHTML = 'ingresa una cantidad en el rango de 1 a 3';
-        }  
-    }
+        }
+
 };
 
 function createNodeMain() {
     const variedadDeCanpacidades = Number(document.getElementById('variedadCapacidades').value);
-    let sectionContainer = document.getElementById('section-container');
-    sectionContainer.innerHTML = ''; 
-    const texto = document.getElementById('texto');
-    texto.innerHTML = '';
-    const h2 = document.createElement('h2-title');
-    const textH2 = document.createTextNode(`Potencia de Baterias #${variedadDeCanpacidades}`);
-    const divTitle = document.createElement('div');
-    divTitle.classList.add('titulo');
-    h2.appendChild(textH2);
-    divTitle.appendChild(h2);
-    sectionContainer.appendChild(divTitle);
-    const div1 = document.createElement('div');
-    const input = document.createElement('input');
-    const label = document.createElement('label');
-    label.setAttribute('for', `voltaje`);
-    label.classList.add('label');
-    input.setAttribute('id', `voltaje`);
-    input.setAttribute('type', 'number');
-    const textLabel1 = document.createTextNode(`voltaje`);
-    label.appendChild(textLabel1);
-    div1.appendChild(input);
-    div1.appendChild(label);
-    sectionContainer.appendChild(div1);
-    const div2 = document.createElement('div');
-    const input2 = document.createElement('input');
-    const label2 = document.createElement('label');
-    label2.setAttribute('for', `amperaje`);
-    label2.classList.add('label');
-    input2.setAttribute('id', `amperaje`);
-    input2.setAttribute('type', 'number');
-    const textLabel2 = document.createTextNode(`amperaje`);
-    label2.appendChild(textLabel2);
-    div2.appendChild(input2);
-    div2.appendChild(label2);
-    sectionContainer.appendChild(div2);
+    if (variedadDeCanpacidades === 1 || variedadDeCanpacidades === 2 || variedadDeCanpacidades === 3 ) {
+        let sectionContainer = document.getElementById('section-container');
+        sectionContainer.innerHTML = ''; 
+        const texto = document.getElementById('texto');
+        texto.innerHTML = '';
+        const h2 = document.createElement('h2');
+        const textH2 = document.createTextNode(`Potencia de Baterias #${variedadDeCanpacidades}`);
+        const divTitle = document.createElement('div');
+        divTitle.classList.add('titulo');
+        h2.appendChild(textH2);
+        divTitle.appendChild(h2);
+        sectionContainer.appendChild(divTitle);
+        const div1 = document.createElement('div');
+        const input = document.createElement('input');
+        const label = document.createElement('label');
+        label.setAttribute('for', `voltaje`);
+        label.classList.add('label');
+        input.setAttribute('id', `voltaje`);
+        input.setAttribute('type', 'number');
+        const textLabel1 = document.createTextNode(`voltaje`);
+        label.appendChild(textLabel1);
+        div1.appendChild(input);
+        div1.appendChild(label);
+        sectionContainer.appendChild(div1);
+        const div2 = document.createElement('div');
+        const input2 = document.createElement('input');
+        const label2 = document.createElement('label');
+        label2.setAttribute('for', `amperaje`);
+        label2.classList.add('label');
+        input2.setAttribute('id', `amperaje`);
+        input2.setAttribute('type', 'number');
+        const textLabel2 = document.createTextNode(`amperaje`);
+        label2.appendChild(textLabel2);
+        div2.appendChild(input2);
+        div2.appendChild(label2);
+        sectionContainer.appendChild(div2);
 
-    createNodeInput (variedadDeCanpacidades);
+        createNodeInput (variedadDeCanpacidades);
+    } else {
+    texto.innerHTML = 'ingresa una cantidad en el rango de 1 a 3';
+    }
 };
 
 function potencias1() {
@@ -205,6 +209,6 @@ function potenciaRect(V, A) {
 }
 
 function formulaDeModulo(NB, CB, CF, V) {
-    const result = ((((NB*CB)*10)/100 + CF)*V);
+    const result = ((((NB*CB)*10)/100 + CF)*V) / 1000;
     return result;
 }
