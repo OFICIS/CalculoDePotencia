@@ -127,7 +127,7 @@ function potencias1() {
 
     //potencia rectificador
     const potRect = V*A/1000;
-    
+    const outDoor = 1.3;
     //potencia de bateria
     for (let i = 10; i >= 4; i--) {
         const porcentaje = `${i}%`
@@ -137,11 +137,13 @@ function potencias1() {
         (V*((i*NB*C)/100))/1000;
         const result3 = result2;
         potBB.push(result3);
-        const sumaRectBat = (potRect + result3).toFixed(3);
+        const sumaRectBat = (potRect + result3);
         suma1.push(sumaRectBat); 
+        const sumaTotal = outDoor + sumaRectBat;
+        suma2.push(sumaTotal);
     };
     //creando los nodos de 6x7
-    for (let j = 0; j < 6; j++) {
+    for (let j = 0; j < 7; j++) {
         for (let i = 0; i < 6; i++) {
             const div = document.createElement('div');
             const p = document.createElement('p');
@@ -163,17 +165,17 @@ function potencias1() {
                 p.appendChild(pText);
             } 
              if (p.matches('.p3')) {
-                const pText = document.createTextNode(suma1[j]);
+                const pText = document.createTextNode(suma1[j].toFixed(3));
                 p.appendChild(pText);
             } 
-            /* if (p.matches('.p4')) {
-                const pText = document.createTextNode(porcentajeArr[j]);
+             if (p.matches('.p4')) {
+                const pText = document.createTextNode(outDoor);
                 p.appendChild(pText);
             } 
             if (p.matches('.p5')) {
-                const pText = document.createTextNode(porcentajeArr[j]);
+                const pText = document.createTextNode(suma2[j].toFixed(3));
                 p.appendChild(pText);
-            } */    
+            }    
         }
         
     }
