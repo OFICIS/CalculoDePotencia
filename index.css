@@ -8,14 +8,22 @@ html {
 }
 body {
     width: 100%;
+    height: 100%;
     min-width: 320px;
-    background-color: rgb(71, 70, 70);
+    background: linear-gradient(45deg,rgb(49, 75, 82),rgb(48, 47, 47),rgb(23, 94, 110),black);
+    background-size: 400% 1000%;
+    background-repeat: no-repeat;
+    animation: cambiar 10s ease-in-out infinite;
     color: white;
+    font-family: 'Roboto', sans-serif;
     font-size: 1.6rem;
-    display: flex;
-    flex-direction: column;
     align-items: center;
     padding-top: 70px;
+}
+@keyframes cambiar{
+    0%{background-position: 0 50%;}
+    50%{background-position: 100% 50%;}
+    100%{background-position: 0 50%;}
 }
 header {
     width: 90%;
@@ -35,12 +43,12 @@ main {
     margin: 0 auto;
 }
 
-section {
+.section-container {
     width: 90%;
     display:flex;
     flex-direction: column;
     gap: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
     max-width: 380px;
     margin: 0 auto;
     margin-top: 30px;
@@ -75,6 +83,8 @@ button:hover {
 
 
 .text-container {
+    display: flex;
+    flex-direction: column;
     width: 90%;
     margin: 0 auto;
     max-width: 380px;
@@ -82,13 +92,20 @@ button:hover {
     justify-content: center;
     margin-top: 30px;
 }
+#texto2 {
+    font-size: 1.8rem;
+    line-height: 40px;
+    text-align: center;
+}
+
 #texto {
     font-size: 1.8rem;
     line-height: 40px;
     text-align: center;
 }
 
-.section-2 {
+
+.primerInput {
     width: 80%;
     margin: 0 auto;
     display: flex;
@@ -96,3 +113,51 @@ button:hover {
     gap: 10px;
     align-items: center;
 }
+
+.section-container2 {
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+/*     grid-template-columns: repeat(auto-fit, minmax(80px, 150px));
+    grid-auto-rows: 120px; */
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 120px;
+    
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgb(54 179 192 / 70%);
+    gap: 5px;
+}
+.section-container2 .div {
+    background-color: bisque;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.section-container2 .divBox {
+    background: 
+    linear-gradient(180deg,#3d4242, rgb(29, 122, 126));
+    border-radius: 5px;
+}
+.section-container2 .div10,
+.section-container2 .div9,
+.section-container2 .div8,
+.section-container2 .div7,
+.section-container2 .div6,
+.section-container2 .div5,
+.section-container2 .div4 {
+    background: black;
+    border: 3px solid rgb(120, 180, 182);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+/* .inactive{
+    display: none;
+} */

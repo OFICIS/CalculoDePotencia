@@ -1,76 +1,62 @@
+function createNodeMain() {
+    const variedadDeCanpacidades = Number(document.getElementById('variedadCapacidades').value);
+    if (variedadDeCanpacidades === 1 || variedadDeCanpacidades === 2 || variedadDeCanpacidades === 3 ) {
+        let sectionContainer = document.getElementById('section-container');
+        sectionContainer.innerHTML = ''; 
+        const texto2 = document.getElementById('texto2');
+        texto2.innerHTML = '';
+        const texto = document.getElementById('texto');
+        texto.innerHTML = '';
+        const h2 = document.createElement('h2');
+        const textH2 = document.createTextNode(`Potencia de Baterias #${variedadDeCanpacidades}`);
+        const divTitle = document.createElement('div');
+        divTitle.classList.add('titulo');
+        h2.appendChild(textH2);
+        divTitle.appendChild(h2);
+        sectionContainer.appendChild(divTitle);
+        const div0 = document.createElement('div');
+        const input0 = document.createElement('input');
+        const label0 = document.createElement('label');
+        label0.setAttribute('for', `cF`);
+        label0.classList.add('label');
+        input0.setAttribute('id', `cF`);
+        input0.setAttribute('type', 'number');
+        const textLabel0 = document.createTextNode(`Carga Final Proyectada`);
+        label0.appendChild(textLabel0);
+        div0.appendChild(input0);
+        div0.appendChild(label0);
+        sectionContainer.appendChild(div0);
+        const div1 = document.createElement('div');
+        const input = document.createElement('input');
+        const label = document.createElement('label');
+        label.setAttribute('for', `voltaje`);
+        label.classList.add('label');
+        input.setAttribute('id', `voltaje`);
+        input.setAttribute('type', 'number');
+        const textLabel1 = document.createTextNode(`voltaje`);
+        label.appendChild(textLabel1);
+        div1.appendChild(input);
+        div1.appendChild(label);
+        sectionContainer.appendChild(div1);
+        const div2 = document.createElement('div');
+        const input2 = document.createElement('input');
+        const label2 = document.createElement('label');
+        label2.setAttribute('for', `amperaje`);
+        label2.classList.add('label');
+        input2.setAttribute('id', `amperaje`);
+        input2.setAttribute('type', 'number');
+        const textLabel2 = document.createTextNode(`amperaje`);
+        label2.appendChild(textLabel2);
+        div2.appendChild(input2);
+        div2.appendChild(label2);
+        sectionContainer.appendChild(div2);
 
-//cuando existe mas de una capacidad de bateria
-/* function potencias3(V, A, P, NB, C, NB2, C2, NB3, C3) {
-
-    const result = V*A/1000;
-    const result2 = 
-    (V*(((P*NB*C)/100)+((P*NB2*C2)/100)+((P*NB3*C3)/100)))/1000;
-    const resultA = result2.toFixed(3);
-    const result3 = `potenciaRect ${result} potenciaBat ${resultA}`;  
-    return result3;
-} */
-
-function potencias3() {
-    const V = Number(document.getElementById('voltaje').value);
-    const A = Number(document.getElementById('amperaje').value);
-    const NB = Number(document.getElementById('baterias1').value);
-    const C = Number(document.getElementById('capacidad1').value);
-    const NB2 = Number(document.getElementById('capacidad2').value);
-    const C2 = Number(document.getElementById('capacidad2').value);
-    const NB3 = Number(document.getElementById('capacidad3').value);
-    const C3 = Number(document.getElementById('capacidad3').value);
-    const result = V*A/1000;
-    texto.innerHTML = `potenciaRect ${result.toFixed(3)}` + '<br>';
-    for (let i = 10; i >= 4; i--) {
-        const result2 = 
-        (V*(((i*NB*C)/100)+((i*NB2*C2)/100)+((i*NB3*C3)/100)))/1000;
-        const result3 = `${i}% potenciaBat ${result2.toFixed(3)}`;
-        texto.innerHTML += result3 + '<br>';
-        console.log(result3)
-    };
-}; 
-
-
-/* function potencias2(V, A, P, NB, C, NB2, C2) {
-
-    const result = V*A/1000;
-    const result2 = 
-    (V*(((P*NB*C)/100)+((P*NB2*C2)/100)))/1000;
-    const resultA = result2.toFixed(3);
-    const result3 = `potenciaRect ${result} potenciaBat ${resultA}`;  
-    return result3;
-} */
-
-function potencias2() {
-    const V = Number(document.getElementById('voltaje').value);
-    const A = Number(document.getElementById('amperaje').value);
-    const NB = Number(document.getElementById('baterias1').value);
-    const C = Number(document.getElementById('capacidad1').value);
-    const NB2 = Number(document.getElementById('capacidad2').value);
-    const C2 = Number(document.getElementById('capacidad2').value);
-    const result = V*A/1000;
-    texto.innerHTML = `potenciaRect ${result.toFixed(3)}` + '<br>';
-    for (let i = 10; i >= 4; i--) {
-        const result2 = 
-        (V*(((i*NB*C)/100)+((i*NB2*C2)/100)))/1000;
-        const result3 = `${i}% potenciaBat ${result2.toFixed(3)}`;
-        texto.innerHTML += result3 + '<br>';
-        console.log(result3)
-    };
+        createNodeInput (variedadDeCanpacidades);
+    } else {
+    texto.innerHTML = 'ingresa una cantidad en el rango de 1 a 3';
+    }
 };
 
-/* function potencias1(V, A, P, NB, C) {
-
-    const result = V*A/1000;
-    for(i = 0; i < P; i++) {
-
-    }
-    const result2 = 
-    (V*((P*NB*C)/100))/1000;
-    const resultA = result2.toFixed(3);
-    const result3 = `potenciaRect ${result} potenciaBat ${resultA}`;  
-    return result3;
-} */
 function createNodeInput (numberCreate) {
      let sectionContainer = document.getElementById('section-container');
      const texto = document.getElementById('texto');
@@ -120,63 +106,45 @@ function createNodeInput (numberCreate) {
 
 };
 
-function createNodeMain() {
-    const variedadDeCanpacidades = Number(document.getElementById('variedadCapacidades').value);
-    if (variedadDeCanpacidades === 1 || variedadDeCanpacidades === 2 || variedadDeCanpacidades === 3 ) {
-        let sectionContainer = document.getElementById('section-container');
-        sectionContainer.innerHTML = ''; 
-        const texto = document.getElementById('texto');
-        texto.innerHTML = '';
-        const h2 = document.createElement('h2');
-        const textH2 = document.createTextNode(`Potencia de Baterias #${variedadDeCanpacidades}`);
-        const divTitle = document.createElement('div');
-        divTitle.classList.add('titulo');
-        h2.appendChild(textH2);
-        divTitle.appendChild(h2);
-        sectionContainer.appendChild(divTitle);
-        const div1 = document.createElement('div');
-        const input = document.createElement('input');
-        const label = document.createElement('label');
-        label.setAttribute('for', `voltaje`);
-        label.classList.add('label');
-        input.setAttribute('id', `voltaje`);
-        input.setAttribute('type', 'number');
-        const textLabel1 = document.createTextNode(`voltaje`);
-        label.appendChild(textLabel1);
-        div1.appendChild(input);
-        div1.appendChild(label);
-        sectionContainer.appendChild(div1);
-        const div2 = document.createElement('div');
-        const input2 = document.createElement('input');
-        const label2 = document.createElement('label');
-        label2.setAttribute('for', `amperaje`);
-        label2.classList.add('label');
-        input2.setAttribute('id', `amperaje`);
-        input2.setAttribute('type', 'number');
-        const textLabel2 = document.createTextNode(`amperaje`);
-        label2.appendChild(textLabel2);
-        div2.appendChild(input2);
-        div2.appendChild(label2);
-        sectionContainer.appendChild(div2);
 
-        createNodeInput (variedadDeCanpacidades);
-    } else {
-    texto.innerHTML = 'ingresa una cantidad en el rango de 1 a 3';
-    }
-};
 
 function potencias1() {
-
+    const texto = document.getElementById('texto');
+    const texto2 = document.getElementById('texto2');
     const V = Number(document.getElementById('voltaje').value);
     const A = Number(document.getElementById('amperaje').value);
     const NB = Number(document.getElementById('baterias1').value);
     const C = Number(document.getElementById('capacidad1').value);
-    const texto = document.getElementById('texto');
+    const CF = Number(document.getElementById('cF').value);
+    
+    const result0 = (((NB*C)*10)/100 + CF)*V / 1000;
+    texto2.innerHTML = `La Potencia de modulos es ${result0.toFixed(3)}` + '<br>';
+
     const result = V*A/1000;
     texto.innerHTML = `potenciaRect ${result.toFixed(3)}` + '<br>';
-    for (let i = 10; i >= 1; i--) {
+    const arrayResult = [];
+    for (let i = 10; i >= 4; i--) {
         const result2 = 
         (V*((i*NB*C)/100))/1000;
+        const result3 = `${i}% potenciaBat ${result2.toFixed(3)}`;
+        texto.innerHTML += result3 + '<br>';
+        arrayResult.push(result3);
+    };
+    
+};
+
+function potencias2() {
+    const V = Number(document.getElementById('voltaje').value);
+    const A = Number(document.getElementById('amperaje').value);
+    const NB = Number(document.getElementById('baterias1').value);
+    const C = Number(document.getElementById('capacidad1').value);
+    const NB2 = Number(document.getElementById('capacidad2').value);
+    const C2 = Number(document.getElementById('capacidad2').value);
+    const result = V*A/1000;
+    texto.innerHTML = `potenciaRect ${result.toFixed(3)}` + '<br>';
+    for (let i = 10; i >= 4; i--) {
+        const result2 = 
+        (V*(((i*NB*C)/100)+((i*NB2*C2)/100)))/1000;
         const result3 = `${i}% potenciaBat ${result2.toFixed(3)}`;
         texto.innerHTML += result3 + '<br>';
         console.log(result3)
@@ -184,6 +152,33 @@ function potencias1() {
 };
 
 
+function potencias3() {
+    const V = Number(document.getElementById('voltaje').value);
+    const A = Number(document.getElementById('amperaje').value);
+    const NB = Number(document.getElementById('baterias1').value);
+    const C = Number(document.getElementById('capacidad1').value);
+    const NB2 = Number(document.getElementById('capacidad2').value);
+    const C2 = Number(document.getElementById('capacidad2').value);
+    const NB3 = Number(document.getElementById('capacidad3').value);
+    const C3 = Number(document.getElementById('capacidad3').value);
+    const result = V*A/1000;
+    texto.innerHTML = `potenciaRect ${result.toFixed(3)}` + '<br>';
+    for (let i = 10; i >= 4; i--) {
+        const result2 = 
+        (V*(((i*NB*C)/100)+((i*NB2*C2)/100)+((i*NB3*C3)/100)))/1000;
+        const result3 = `${i}% potenciaBat ${result2.toFixed(3)}`;
+        texto.innerHTML += result3 + '<br>';
+        console.log(result3)
+    };
+}; 
+
+function formulaDeModulo(NB, CB, CF, V) {
+    const texto = document.getElementById('texto');
+
+    const result0 = (((NB*C)*10)/100 + CF)*V / 1000;
+    texto.innerHTML = `La Potencia de modulos es ${result0.toFixed(3)}` + '<br>';
+    console.log(result0)
+}
 
 //V= voltaje de el TG (220, 380)  I= 1 aire de 5tn 15amp --ingresar el total de amperaje, 3tn = 10;
 function potenciaAAtri(V, I) {
@@ -208,7 +203,41 @@ function potenciaRect(V, A) {
     return resultText;
 }
 
-function formulaDeModulo(NB, CB, CF, V) {
-    const result = ((((NB*CB)*10)/100 + CF)*V) / 1000;
-    return result;
-}
+//cuando existe mas de una capacidad de bateria
+/* function potencias3(V, A, P, NB, C, NB2, C2, NB3, C3) {
+
+    const result = V*A/1000;
+    const result2 = 
+    (V*(((P*NB*C)/100)+((P*NB2*C2)/100)+((P*NB3*C3)/100)))/1000;
+    const resultA = result2.toFixed(3);
+    const result3 = `potenciaRect ${result} potenciaBat ${resultA}`;  
+    return result3;
+} */
+
+
+
+
+/* function potencias2(V, A, P, NB, C, NB2, C2) {
+
+    const result = V*A/1000;
+    const result2 = 
+    (V*(((P*NB*C)/100)+((P*NB2*C2)/100)))/1000;
+    const resultA = result2.toFixed(3);
+    const result3 = `potenciaRect ${result} potenciaBat ${resultA}`;  
+    return result3;
+} */
+
+
+
+/* function potencias1(V, A, P, NB, C) {
+
+    const result = V*A/1000;
+    for(i = 0; i < P; i++) {
+
+    }
+    const result2 = 
+    (V*((P*NB*C)/100))/1000;
+    const resultA = result2.toFixed(3);
+    const result3 = `potenciaRect ${result} potenciaBat ${resultA}`;  
+    return result3;
+} */
