@@ -28,7 +28,7 @@ body {
 header {
     width: 90%;
     max-width: 380px;
-    height: 200px;
+    height: auto;
     margin: 0 auto;
     text-align: center;
     padding-top: 15px;
@@ -158,6 +158,6 @@ button:hover {
     font-weight: 500;
 }
 
-/* .inactive{
+ .inactive{
     display: none;
-} */
+} 

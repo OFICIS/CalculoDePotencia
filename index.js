@@ -110,7 +110,7 @@ function createNodeInput (numberCreate) {
 
 
 function potencias1() {
-    const texto = document.getElementById('texto');
+    sectionContainer2.classList.remove('inactive');
     const texto2 = document.getElementById('texto2');
     const V = Number(document.getElementById('voltaje').value);
     const A = Number(document.getElementById('amperaje').value);
@@ -183,42 +183,159 @@ function potencias1() {
 };
 
 function potencias2() {
+    sectionContainer2.classList.remove('inactive');
+    const texto = document.getElementById('texto');
     const V = Number(document.getElementById('voltaje').value);
     const A = Number(document.getElementById('amperaje').value);
     const NB = Number(document.getElementById('baterias1').value);
     const C = Number(document.getElementById('capacidad1').value);
-    const NB2 = Number(document.getElementById('capacidad2').value);
+    const NB2 = Number(document.getElementById('baterias2').value);
     const C2 = Number(document.getElementById('capacidad2').value);
-    const result = V*A/1000;
-    texto.innerHTML = `potenciaRect ${result.toFixed(3)}` + '<br>';
+    const CF = Number(document.getElementById('cF').value);
+    
+
+    const porcentajeArr = [];
+    const potBB = [];
+    const suma1 = [];
+    const suma2 = [];
+
+    const result0 = (((NB*C)*10)/100 + CF)*V / 1000;
+    texto.innerHTML = `La Potencia de modulos es ${result0.toFixed(3)}` + '<br>';
+
+    //potencia rectificador
+    const potRect = V*A/1000;
+    const outDoor = 1.3;
+    //potencia de bateria
     for (let i = 10; i >= 4; i--) {
+        const porcentaje = `${i}%`
+        porcentajeArr.push(porcentaje);
+
         const result2 = 
-        (V*(((i*NB*C)/100)+((i*NB2*C2)/100)))/1000;
-        const result3 = `${i}% potenciaBat ${result2.toFixed(3)}`;
-        texto.innerHTML += result3 + '<br>';
-        console.log(result3)
+        (V*(((i*NB*C)/100)+((i*NB2*C2)/100)))/1000;;
+        const result3 = result2;
+        potBB.push(result3);
+        const sumaRectBat = (potRect + result3);
+        suma1.push(sumaRectBat); 
+        const sumaTotal = outDoor + sumaRectBat;
+        suma2.push(sumaTotal);
     };
+    //creando los nodos de 6x7
+    for (let j = 0; j < 7; j++) {
+        for (let i = 0; i < 6; i++) {
+            const div = document.createElement('div');
+            const p = document.createElement('p');
+            p.classList.add(`p${i}`);
+            div.classList.add('div10');
+            div.appendChild(p)
+            sectionContainer2.appendChild(div);
+            /* console.log(p.classList.contains("p1")) */
+            if (p.matches('.p0')) {
+                const pText = document.createTextNode(porcentajeArr[j]);
+                p.appendChild(pText);
+            }
+            if (p.matches('.p1')) {
+                const pText = document.createTextNode(potBB[j].toFixed(3));
+                p.appendChild(pText);
+            }
+            if (p.matches('.p2')) {
+                const pText = document.createTextNode(potRect.toFixed(3));
+                p.appendChild(pText);
+            } 
+             if (p.matches('.p3')) {
+                const pText = document.createTextNode(suma1[j].toFixed(3));
+                p.appendChild(pText);
+            } 
+             if (p.matches('.p4')) {
+                const pText = document.createTextNode(outDoor);
+                p.appendChild(pText);
+            } 
+            if (p.matches('.p5')) {
+                const pText = document.createTextNode(suma2[j].toFixed(3));
+                p.appendChild(pText);
+            }    
+        }
+        
+    }
+    
 };
 
 
 function potencias3() {
+    sectionContainer2.classList.remove('inactive');
+    const texto = document.getElementById('texto');
     const V = Number(document.getElementById('voltaje').value);
     const A = Number(document.getElementById('amperaje').value);
     const NB = Number(document.getElementById('baterias1').value);
     const C = Number(document.getElementById('capacidad1').value);
-    const NB2 = Number(document.getElementById('capacidad2').value);
+    const NB2 = Number(document.getElementById('baterias2').value);
     const C2 = Number(document.getElementById('capacidad2').value);
-    const NB3 = Number(document.getElementById('capacidad3').value);
+    const NB3 = Number(document.getElementById('baterias3').value);
     const C3 = Number(document.getElementById('capacidad3').value);
-    const result = V*A/1000;
-    texto.innerHTML = `potenciaRect ${result.toFixed(3)}` + '<br>';
+    const CF = Number(document.getElementById('cF').value);
+    
+    const porcentajeArr = [];
+    const potBB = [];
+    const suma1 = [];
+    const suma2 = [];
+
+    const result0 = (((NB*C)*10)/100 + CF)*V / 1000;
+    texto.innerHTML = `La Potencia de modulos es ${result0.toFixed(3)}` + '<br>';
+
+    //potencia rectificador
+    const potRect = V*A/1000;
+    const outDoor = 1.3;
+    //potencia de bateria
     for (let i = 10; i >= 4; i--) {
+        const porcentaje = `${i}%`
+        porcentajeArr.push(porcentaje);
+
         const result2 = 
         (V*(((i*NB*C)/100)+((i*NB2*C2)/100)+((i*NB3*C3)/100)))/1000;
-        const result3 = `${i}% potenciaBat ${result2.toFixed(3)}`;
-        texto.innerHTML += result3 + '<br>';
-        console.log(result3)
+        const result3 = result2;
+        potBB.push(result3);
+        const sumaRectBat = (potRect + result3);
+        suma1.push(sumaRectBat); 
+        const sumaTotal = outDoor + sumaRectBat;
+        suma2.push(sumaTotal);
     };
+    //creando los nodos de 6x7
+    for (let j = 0; j < 7; j++) {
+        for (let i = 0; i < 6; i++) {
+            const div = document.createElement('div');
+            const p = document.createElement('p');
+            p.classList.add(`p${i}`);
+            div.classList.add('div10');
+            div.appendChild(p)
+            sectionContainer2.appendChild(div);
+            /* console.log(p.classList.contains("p1")) */
+            if (p.matches('.p0')) {
+                const pText = document.createTextNode(porcentajeArr[j]);
+                p.appendChild(pText);
+            }
+            if (p.matches('.p1')) {
+                const pText = document.createTextNode(potBB[j].toFixed(3));
+                p.appendChild(pText);
+            }
+            if (p.matches('.p2')) {
+                const pText = document.createTextNode(potRect.toFixed(3));
+                p.appendChild(pText);
+            } 
+             if (p.matches('.p3')) {
+                const pText = document.createTextNode(suma1[j].toFixed(3));
+                p.appendChild(pText);
+            } 
+             if (p.matches('.p4')) {
+                const pText = document.createTextNode(outDoor);
+                p.appendChild(pText);
+            } 
+            if (p.matches('.p5')) {
+                const pText = document.createTextNode(suma2[j].toFixed(3));
+                p.appendChild(pText);
+            }    
+        }
+        
+    }
+   
 }; 
 
 function formulaDeModulo(NB, CB, CF, V) {
