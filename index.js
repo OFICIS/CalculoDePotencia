@@ -1,6 +1,45 @@
 let sectionContainer2 = document.getElementById('section-container2');
+let primerDiv = document.getElementById('primerInput');
+let header = document.getElementById('header');
+const potenciaAA = document.getElementById('potenciaAA').value;
+
+
+{/* <label for="VoltajeGeneral" class="label" id="label">Escoje el tipo de Voltaje</label>
+<input list="tipoVoltaje" id="VoltajeGeneral"/>
+<datalist id="tipoVoltaje">
+    <option value="220"></option>
+    <option value="380"></option>
+</datalist> */}
+
+function escribe() {
+    const input0 = document.createElement('input');
+    const label0 = document.createElement('label');
+    const datalist = document.createElement('datalist');
+    const option1 = document.createElement('option');
+    const option2 = document.createElement('option');
+    input0.setAttribute('id', `VoltajeGeneral`);
+    input0.setAttribute('list', 'tipoVoltaje');
+    label0.setAttribute('for', `VoltajeGeneral`);
+    label0.classList.add('label');
+    datalist.setAttribute('id', 'tipoVoltaje');
+    const textLabel0 = document.createTextNode(`Escoje el tipo de Voltaje`);
+    const textOption1 = document.createTextNode(`220`);
+    const textOption2 = document.createTextNode(`380`);
+    label0.appendChild(textLabel0);
+    option1.appendChild(textOption1);
+    option2.appendChild(textOption2);
+    datalist.appendChild(option1);
+    datalist.appendChild(option2);
+    primerDiv.appendChild(input0);
+    primerDiv.appendChild(label0);
+    primerDiv.appendChild(datalist);
+    header.appendChild(primerDiv);
+}
+
 function createNodeMain() {
     const variedadDeCanpacidades = Number(document.getElementById('variedadCapacidades').value);
+    
+
     if (variedadDeCanpacidades === 1 || variedadDeCanpacidades === 2 || variedadDeCanpacidades === 3 ) {
         let sectionContainer = document.getElementById('section-container');
         sectionContainer.innerHTML = ''; 

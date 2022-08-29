@@ -11,23 +11,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,300&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
+    <header id="header">
         <h1>Calculo de Potencias</h1>
-        <div class="primerInput">
+        <div class="primerInput" id="primerInput">
             <label class="label" for="variedadCapacidades">¿Cuantos tipos de capacidad de BB hay en el site?</label>
             <input id="variedadCapacidades" type="number">
             <label for="potenciaAA" class="label">Escoje el tipo de potencia de AA</label>
-            <input list="lista" id="potenciaAA"/>
+            <input list="lista" id="potenciaAA" oninput="escribe()"/>
             <datalist id="lista">
                 <option value="OUTDOOR"></option>
                 <option value="INDOOR"></option>
             </datalist>
-            <!-- <label for="monTri" class="label">Escoje la propiedad del site</label>
-            <input list="lista2" id="monTri"/>
-            <datalist id="lista2">
-                <option value="MONOFASICO"></option>
-                <option value="TRIFASICO"></option>
-            </datalist> -->
             <button type="button" onclick="createNodeMain()">enviar</button>
         </div>
     </header>
