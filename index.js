@@ -1,51 +1,119 @@
 let sectionContainer2 = document.getElementById('section-container2');
 let primerDiv = document.getElementById('primerInput');
 let header = document.getElementById('header');
-const potenciaAA = document.getElementById('potenciaAA').value;
+let boleano = true;
 
-
-{/* <label for="VoltajeGeneral" class="label" id="label">Escoje el tipo de Voltaje</label>
+/*<label for="VoltajeGeneral" class="label" id="label">Escoje el tipo de Voltaje</label>
 <input list="tipoVoltaje" id="VoltajeGeneral"/>
 <datalist id="tipoVoltaje">
     <option value="220"></option>
     <option value="380"></option>
-</datalist> */}
-
-function escribe() {
+</datalist>*/
+function createInput(textLabel, forLabelIdInput) {
+    const label0 = document.createElement('label'); 
+    const textLabel0 = document.createTextNode(`${textLabel}`);
+    label0.setAttribute('for', `${forLabelIdInput}`);
+    label0.classList.add('label');
+    label0.appendChild(textLabel0);
+    primerDiv.appendChild(label0);
     const input0 = document.createElement('input');
-    const label0 = document.createElement('label');
+    input0.setAttribute('id', `${forLabelIdInput}`);
+    primerDiv.appendChild(input0);
+    header.appendChild(primerDiv);   
+}
+
+function createDataList(textLabel, forLabelIdInput, listName, texOption1, texOption2){
+    const label0 = document.createElement('label'); 
+    const textLabel0 = document.createTextNode(`${textLabel}`);
+    label0.setAttribute('for', `${forLabelIdInput}`);
+    label0.classList.add('label');
+    label0.appendChild(textLabel0);
+    primerDiv.appendChild(label0);
+    const input0 = document.createElement('input');
     const datalist = document.createElement('datalist');
     const option1 = document.createElement('option');
     const option2 = document.createElement('option');
-    input0.setAttribute('id', `VoltajeGeneral`);
-    input0.setAttribute('list', 'tipoVoltaje');
-    label0.setAttribute('for', `VoltajeGeneral`);
-    label0.classList.add('label');
-    datalist.setAttribute('id', 'tipoVoltaje');
-    const textLabel0 = document.createTextNode(`Escoje el tipo de Voltaje`);
-    const textOption1 = document.createTextNode(`220`);
-    const textOption2 = document.createTextNode(`380`);
-    label0.appendChild(textLabel0);
+    input0.setAttribute('id', `${forLabelIdInput}`);
+    input0.setAttribute('list', `${listName}`);
+    datalist.setAttribute('id', `${listName}`);
+    const textOption1 = document.createTextNode(`${texOption1}`);
+    const textOption2 = document.createTextNode(`${texOption2}`);
     option1.appendChild(textOption1);
     option2.appendChild(textOption2);
     datalist.appendChild(option1);
     datalist.appendChild(option2);
     primerDiv.appendChild(input0);
-    primerDiv.appendChild(label0);
     primerDiv.appendChild(datalist);
-    header.appendChild(primerDiv);
+    header.appendChild(primerDiv);   
+}
+
+function createNodePreviw() {
+    let potenciaAA = document.getElementById('potenciaAA');
+    let nodeDiv = document.getElementById('segundoDiv');
+    console.log(potenciaAA.value)
+    if (boleano) {
+        if (potenciaAA.value === 'INDOOR') {
+            createDataList(
+                '¿Que tipo es el site?', 
+                'tipoCable', 
+                'monTri', 
+                'Monofasico', 
+                'Trifasico'
+            )
+            createDataList(
+                'Escoje el Voltaje del site', 
+                'VoltajeGeneral',
+                'tipoVoltaje',
+                '220',
+                '380'
+            );
+            
+            createDataList(
+                'Escoje el tonelaje del AA', 
+                'tonelaje', 
+                'tipoTonelaje', 
+                '5TN', 
+                '3TN'
+            );
+            
+            let input = document.getElementById('tonelaje');
+            input.addEventListener('input', () => {
+                createInput(
+                    '¿Cual es la cantidad de AA?',
+                    'cantAA'
+                )
+                let inputAA = document.getElementById('cantAA');
+                inputAA.setAttribute('type', 'number');
+                const button = document.createElement('button');
+                const buttonText = document.createTextNode('enviar');
+                button.appendChild(buttonText);
+                primerDiv.appendChild(button);
+                button.setAttribute('type', 'button');
+                button.addEventListener('click', createNodeMain);
+            })
+
+ 
+        } else {
+            const button = document.createElement('button');
+            const buttonText = document.createTextNode('enviar');
+            button.appendChild(buttonText);
+            primerDiv.appendChild(button);
+            button.setAttribute('type', 'button');
+            button.addEventListener('click', createNodeMain);
+        }
+    }
+    boleano = false;
 }
 
 function createNodeMain() {
     const variedadDeCanpacidades = Number(document.getElementById('variedadCapacidades').value);
     
-
     if (variedadDeCanpacidades === 1 || variedadDeCanpacidades === 2 || variedadDeCanpacidades === 3 ) {
         let sectionContainer = document.getElementById('section-container');
         sectionContainer.innerHTML = ''; 
         const texto2 = document.getElementById('texto2');
         texto2.innerHTML = '';
-        const texto = document.getElementById('texto');
+        const texto = document.getElementById('texto'); 
         texto.innerHTML = '';
         const h2 = document.createElement('h2');
         const textH2 = document.createTextNode(`Potencia de Baterias #${variedadDeCanpacidades}`);
@@ -150,6 +218,8 @@ function createNodeInput (numberCreate) {
 
 function potencias1() {
     sectionContainer2.classList.remove('inactive');
+    const tipoSite = document.getElementById('tipoCable');
+    console.log(tipoSite.value);
     const texto2 = document.getElementById('texto2');
     const V = Number(document.getElementById('voltaje').value);
     const A = Number(document.getElementById('amperaje').value);
@@ -160,9 +230,28 @@ function potencias1() {
     const potBB = [];
     const suma1 = [];
     const suma2 = [];
+    const sumaIndoor = [];
+    const sumaIndoorMono = [];
 
+    //calculo aireAcondicionado
+    let potenciaAA = document.getElementById('potenciaAA');
+    const voltajeSite = Number(document.getElementById('VoltajeGeneral').value);
+    let tipoTN = document.getElementById('tonelaje');
+    const cantidadAA = Number(document.getElementById('cantAA').value);
+    if (tipoTN.value === '5TN') {
+        tipoTN = 15;
+    } else if (tipoTN.value === '3TN') {
+        tipoTN = 10
+    };
+    let tipoTNtotal = tipoTN * cantidadAA;
+    const indoor = (1.73 * voltajeSite * tipoTNtotal * 0.85) / 1000;
+
+    //calculo aire Acondicionado monofasico
+    const indoorMono = (voltajeSite * tipoTNtotal) / 1000;
+
+    //modulos capacidad 
     const result0 = (((NB*C)*10)/100 + CF)*V / 1000;
-    texto2.innerHTML = `La Potencia de modulos es ${result0.toFixed(3)}` + '<br>';
+    texto2.innerHTML = `La Potencia de modulos es ${result0.toFixed(3)}` + '<br>'; 
 
     //potencia rectificador
     const potRect = V*A/1000;
@@ -180,7 +269,13 @@ function potencias1() {
         suma1.push(sumaRectBat); 
         const sumaTotal = outDoor + sumaRectBat;
         suma2.push(sumaTotal);
+        const sumaTotal2 = indoor + sumaRectBat;
+        sumaIndoor.push(sumaTotal2);
+        const sumaTotal3 = indoorMono + sumaRectBat;
+        sumaIndoorMono.push(sumaTotal3);
+        console.log(sumaTotal3);
     };
+    console.log(sumaIndoorMono);
     //creando los nodos de 6x7
     for (let j = 0; j < 7; j++) {
         for (let i = 0; i < 6; i++) {
@@ -208,12 +303,34 @@ function potencias1() {
                 p.appendChild(pText);
             } 
              if (p.matches('.p4')) {
-                const pText = document.createTextNode(outDoor);
-                p.appendChild(pText);
+                if (potenciaAA.value === 'INDOOR') {
+                    if (tipoSite.value === 'Trifasico') {
+                        const pText = document.createTextNode(indoor.toFixed(3));
+                        p.appendChild(pText);
+                    } else {
+                        const pText = document.createTextNode(indoorMono.toFixed(3));
+                        p.appendChild(pText);
+                    }
+                    
+                } else {
+                    const pText = document.createTextNode(outDoor);
+                    p.appendChild(pText);
+                }
             } 
             if (p.matches('.p5')) {
-                const pText = document.createTextNode(suma2[j].toFixed(3));
-                p.appendChild(pText);
+                if (potenciaAA.value === 'INDOOR') {
+                    if (tipoSite.value === 'Trifasico') {
+                        const pText = document.createTextNode(sumaIndoor[j].toFixed(3));
+                        p.appendChild(pText);
+                    } else {
+                        const pText = document.createTextNode(sumaIndoorMono[j].toFixed(3));
+                    p.appendChild(pText);
+                    }
+                    
+                } else {
+                    const pText = document.createTextNode(suma2[j].toFixed(3));
+                    p.appendChild(pText);
+                }
             }    
         }
         
@@ -223,6 +340,7 @@ function potencias1() {
 
 function potencias2() {
     sectionContainer2.classList.remove('inactive');
+    const tipoSite = document.getElementById('tipoCable');
     const texto = document.getElementById('texto');
     const V = Number(document.getElementById('voltaje').value);
     const A = Number(document.getElementById('amperaje').value);
@@ -237,9 +355,27 @@ function potencias2() {
     const potBB = [];
     const suma1 = [];
     const suma2 = [];
+    const sumaIndoor = [];
+    const sumaIndoorMono = [];
 
     const result0 = (((NB*C)*10)/100 + CF)*V / 1000;
     texto.innerHTML = `La Potencia de modulos es ${result0.toFixed(3)}` + '<br>';
+
+    //calculo aireAcondicionado
+    let potenciaAA = document.getElementById('potenciaAA');
+    const voltajeSite = Number(document.getElementById('VoltajeGeneral').value);
+    let tipoTN = document.getElementById('tonelaje');
+    const cantidadAA = Number(document.getElementById('cantAA').value);
+    if (tipoTN.value === '5TN') {
+        tipoTN = 15;
+    } else if (tipoTN.value === '3TN') {
+        tipoTN = 10
+    };
+    let tipoTNtotal = tipoTN * cantidadAA;
+    const indoor = (1.73 * voltajeSite * tipoTNtotal * 0.85) / 1000;
+
+     //calculo aire Acondicionado monofasico
+     const indoorMono = (voltajeSite * tipoTNtotal) / 1000;
 
     //potencia rectificador
     const potRect = V*A/1000;
@@ -257,6 +393,10 @@ function potencias2() {
         suma1.push(sumaRectBat); 
         const sumaTotal = outDoor + sumaRectBat;
         suma2.push(sumaTotal);
+        const sumaTotal2 = indoor + sumaRectBat;
+        sumaIndoor.push(sumaTotal2);
+        const sumaTotal3 = indoorMono + sumaRectBat;
+        sumaIndoorMono.push(sumaTotal3);
     };
     //creando los nodos de 6x7
     for (let j = 0; j < 7; j++) {
@@ -284,16 +424,37 @@ function potencias2() {
                 const pText = document.createTextNode(suma1[j].toFixed(3));
                 p.appendChild(pText);
             } 
-             if (p.matches('.p4')) {
-                const pText = document.createTextNode(outDoor);
-                p.appendChild(pText);
+            if (p.matches('.p4')) {
+                if (potenciaAA.value === 'INDOOR') {
+                    if (tipoSite.value === 'Trifasico') {
+                        const pText = document.createTextNode(indoor.toFixed(3));
+                        p.appendChild(pText);
+                    } else {
+                        const pText = document.createTextNode(indoorMono.toFixed(3));
+                        p.appendChild(pText);
+                    }
+                    
+                } else {
+                    const pText = document.createTextNode(outDoor);
+                    p.appendChild(pText);
+                }
             } 
             if (p.matches('.p5')) {
-                const pText = document.createTextNode(suma2[j].toFixed(3));
-                p.appendChild(pText);
-            }    
+                if (potenciaAA.value === 'INDOOR') {
+                    if (tipoSite.value === 'Trifasico') {
+                        const pText = document.createTextNode(sumaIndoor[j].toFixed(3));
+                        p.appendChild(pText);
+                    } else {
+                        const pText = document.createTextNode(sumaIndoorMono[j].toFixed(3));
+                    p.appendChild(pText);
+                    }
+                    
+                } else {
+                    const pText = document.createTextNode(suma2[j].toFixed(3));
+                    p.appendChild(pText);
+                }
+            }      
         }
-        
     }
     
 };
@@ -301,6 +462,7 @@ function potencias2() {
 
 function potencias3() {
     sectionContainer2.classList.remove('inactive');
+    const tipoSite = document.getElementById('tipoCable');
     const texto = document.getElementById('texto');
     const V = Number(document.getElementById('voltaje').value);
     const A = Number(document.getElementById('amperaje').value);
@@ -316,13 +478,32 @@ function potencias3() {
     const potBB = [];
     const suma1 = [];
     const suma2 = [];
+    const sumaIndoor = [];
+    const sumaIndoorMono = [];
 
     const result0 = (((NB*C)*10)/100 + CF)*V / 1000;
     texto.innerHTML = `La Potencia de modulos es ${result0.toFixed(3)}` + '<br>';
 
+    //calculo aire Acondicionado Trifasico
+    let potenciaAA = document.getElementById('potenciaAA');
+    const voltajeSite = Number(document.getElementById('VoltajeGeneral').value);
+    let tipoTN = document.getElementById('tonelaje');
+    const cantidadAA = Number(document.getElementById('cantAA').value);
+    if (tipoTN.value === '5TN') {
+        tipoTN = 15;
+    } else if (tipoTN.value === '3TN') {
+        tipoTN = 10
+    };
+    let tipoTNtotal = tipoTN * cantidadAA;
+    const indoor = (1.73 * voltajeSite * tipoTNtotal * 0.85) / 1000;
+
+    //calculo aire Acondicionado monofasico
+    const indoorMono = (voltajeSite * tipoTNtotal) / 1000;
+
     //potencia rectificador
     const potRect = V*A/1000;
     const outDoor = 1.3;
+
     //potencia de bateria
     for (let i = 10; i >= 4; i--) {
         const porcentaje = `${i}%`
@@ -336,6 +517,10 @@ function potencias3() {
         suma1.push(sumaRectBat); 
         const sumaTotal = outDoor + sumaRectBat;
         suma2.push(sumaTotal);
+        const sumaTotal2 = indoor + sumaRectBat;
+        sumaIndoor.push(sumaTotal2);
+        const sumaTotal3 = indoorMono + sumaRectBat;
+        sumaIndoorMono.push(sumaTotal3);
     };
     //creando los nodos de 6x7
     for (let j = 0; j < 7; j++) {
@@ -363,14 +548,36 @@ function potencias3() {
                 const pText = document.createTextNode(suma1[j].toFixed(3));
                 p.appendChild(pText);
             } 
-             if (p.matches('.p4')) {
-                const pText = document.createTextNode(outDoor);
-                p.appendChild(pText);
+            if (p.matches('.p4')) {
+                if (potenciaAA.value === 'INDOOR') {
+                    if (tipoSite.value === 'Trifasico') {
+                        const pText = document.createTextNode(indoor.toFixed(3));
+                        p.appendChild(pText);
+                    } else {
+                        const pText = document.createTextNode(indoorMono.toFixed(3));
+                        p.appendChild(pText);
+                    }
+                    
+                } else {
+                    const pText = document.createTextNode(outDoor);
+                    p.appendChild(pText);
+                }
             } 
             if (p.matches('.p5')) {
-                const pText = document.createTextNode(suma2[j].toFixed(3));
-                p.appendChild(pText);
-            }    
+                if (potenciaAA.value === 'INDOOR') {
+                    if (tipoSite.value === 'Trifasico') {
+                        const pText = document.createTextNode(sumaIndoor[j].toFixed(3));
+                        p.appendChild(pText);
+                    } else {
+                        const pText = document.createTextNode(sumaIndoorMono[j].toFixed(3));
+                    p.appendChild(pText);
+                    }
+                    
+                } else {
+                    const pText = document.createTextNode(suma2[j].toFixed(3));
+                    p.appendChild(pText);
+                }
+            }      
         }
         
     }
@@ -385,11 +592,11 @@ function formulaDeModulo(NB, CB, CF, V) {
     console.log(result0)
 }
 
-//V= voltaje de el TG (220, 380)  I= 1 aire de 5tn 15amp --ingresar el total de amperaje, 3tn = 10;
+//V= voltaje de el TG (220, 380)  I= 1 aire de 5tn 15 Amp --ingresar el total de amperaje, 3tn = 10 Amp;
 function potenciaAAtri(V, I) {
+    const texto2 = document.getElementById('texto2');
     const result = (1.73 * V * I * 0.85) / 1000;
-    const resultText = `La potencia AA tri es ${result}`;
-    return resultText;
+    texto2.innerHTML = `La potencia AA tri es ${result.toFixed(3)}` + '<br>';
 }
 
 function potenciaAAmon(V, I) {
