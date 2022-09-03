@@ -217,9 +217,9 @@ function createNodeInput (numberCreate) {
 
 
 function potencias1() {
+    let potenciaAA = document.getElementById('potenciaAA');
     sectionContainer2.classList.remove('inactive');
     const tipoSite = document.getElementById('tipoCable');
-    console.log(tipoSite.value);
     const texto2 = document.getElementById('texto2');
     const V = Number(document.getElementById('voltaje').value);
     const A = Number(document.getElementById('amperaje').value);
@@ -234,20 +234,21 @@ function potencias1() {
     const sumaIndoorMono = [];
 
     //calculo aireAcondicionado
-    let potenciaAA = document.getElementById('potenciaAA');
-    const voltajeSite = Number(document.getElementById('VoltajeGeneral').value);
-    let tipoTN = document.getElementById('tonelaje');
-    const cantidadAA = Number(document.getElementById('cantAA').value);
-    if (tipoTN.value === '5TN') {
-        tipoTN = 15;
-    } else if (tipoTN.value === '3TN') {
-        tipoTN = 10
-    };
-    let tipoTNtotal = tipoTN * cantidadAA;
-    const indoor = (1.73 * voltajeSite * tipoTNtotal * 0.85) / 1000;
+    if(potenciaAA.value === 'INDOOR') {
+        const voltajeSite = Number(document.getElementById('VoltajeGeneral').value);
+        let tipoTN = document.getElementById('tonelaje');
+        const cantidadAA = Number(document.getElementById('cantAA').value);
+        if (tipoTN.value === '5TN') {
+            tipoTN = 15;
+        } else if (tipoTN.value === '3TN') {
+            tipoTN = 10
+        };
+        let tipoTNtotal = tipoTN * cantidadAA;
+        const indoor = (1.73 * voltajeSite * tipoTNtotal * 0.85) / 1000;
 
-    //calculo aire Acondicionado monofasico
-    const indoorMono = (voltajeSite * tipoTNtotal) / 1000;
+        //calculo aire Acondicionado monofasico
+        const indoorMono = (voltajeSite * tipoTNtotal) / 1000;
+    }
 
     //modulos capacidad 
     const result0 = (((NB*C)*10)/100 + CF)*V / 1000;
@@ -269,13 +270,16 @@ function potencias1() {
         suma1.push(sumaRectBat); 
         const sumaTotal = outDoor + sumaRectBat;
         suma2.push(sumaTotal);
-        const sumaTotal2 = indoor + sumaRectBat;
-        sumaIndoor.push(sumaTotal2);
-        const sumaTotal3 = indoorMono + sumaRectBat;
-        sumaIndoorMono.push(sumaTotal3);
-        console.log(sumaTotal3);
+        if (potenciaAA.value === 'INDOOR') {
+            const sumaTotal2 = indoor + sumaRectBat;
+            sumaIndoor.push(sumaTotal2);
+            const sumaTotal3 = indoorMono + sumaRectBat;
+            sumaIndoorMono.push(sumaTotal3);
+            console.log(sumaTotal3);
+        }
+        
     };
-    console.log(sumaIndoorMono);
+
     //creando los nodos de 6x7
     for (let j = 0; j < 7; j++) {
         for (let i = 0; i < 6; i++) {
@@ -339,6 +343,7 @@ function potencias1() {
 };
 
 function potencias2() {
+    let potenciaAA = document.getElementById('potenciaAA');
     sectionContainer2.classList.remove('inactive');
     const tipoSite = document.getElementById('tipoCable');
     const texto = document.getElementById('texto');
@@ -362,20 +367,22 @@ function potencias2() {
     texto.innerHTML = `La Potencia de modulos es ${result0.toFixed(3)}` + '<br>';
 
     //calculo aireAcondicionado
-    let potenciaAA = document.getElementById('potenciaAA');
-    const voltajeSite = Number(document.getElementById('VoltajeGeneral').value);
-    let tipoTN = document.getElementById('tonelaje');
-    const cantidadAA = Number(document.getElementById('cantAA').value);
-    if (tipoTN.value === '5TN') {
-        tipoTN = 15;
-    } else if (tipoTN.value === '3TN') {
-        tipoTN = 10
-    };
-    let tipoTNtotal = tipoTN * cantidadAA;
-    const indoor = (1.73 * voltajeSite * tipoTNtotal * 0.85) / 1000;
+    if(potenciaAA.value === 'INDOOR') {
+        const voltajeSite = Number(document.getElementById('VoltajeGeneral').value);
+        let tipoTN = document.getElementById('tonelaje');
+        const cantidadAA = Number(document.getElementById('cantAA').value);
+        if (tipoTN.value === '5TN') {
+            tipoTN = 15;
+        } else if (tipoTN.value === '3TN') {
+            tipoTN = 10
+        };
+        let tipoTNtotal = tipoTN * cantidadAA;
+        const indoor = (1.73 * voltajeSite * tipoTNtotal * 0.85) / 1000;
 
-     //calculo aire Acondicionado monofasico
-     const indoorMono = (voltajeSite * tipoTNtotal) / 1000;
+        //calculo aire Acondicionado monofasico
+        const indoorMono = (voltajeSite * tipoTNtotal) / 1000;
+    }
+    
 
     //potencia rectificador
     const potRect = V*A/1000;
@@ -393,10 +400,13 @@ function potencias2() {
         suma1.push(sumaRectBat); 
         const sumaTotal = outDoor + sumaRectBat;
         suma2.push(sumaTotal);
-        const sumaTotal2 = indoor + sumaRectBat;
-        sumaIndoor.push(sumaTotal2);
-        const sumaTotal3 = indoorMono + sumaRectBat;
-        sumaIndoorMono.push(sumaTotal3);
+        if (potenciaAA.value === 'INDOOR') {
+            const sumaTotal2 = indoor + sumaRectBat;
+            sumaIndoor.push(sumaTotal2);
+            const sumaTotal3 = indoorMono + sumaRectBat;
+            sumaIndoorMono.push(sumaTotal3);
+            console.log(sumaTotal3);
+        }
     };
     //creando los nodos de 6x7
     for (let j = 0; j < 7; j++) {
@@ -461,6 +471,7 @@ function potencias2() {
 
 
 function potencias3() {
+    let potenciaAA = document.getElementById('potenciaAA');
     sectionContainer2.classList.remove('inactive');
     const tipoSite = document.getElementById('tipoCable');
     const texto = document.getElementById('texto');
@@ -484,21 +495,22 @@ function potencias3() {
     const result0 = (((NB*C)*10)/100 + CF)*V / 1000;
     texto.innerHTML = `La Potencia de modulos es ${result0.toFixed(3)}` + '<br>';
 
-    //calculo aire Acondicionado Trifasico
-    let potenciaAA = document.getElementById('potenciaAA');
-    const voltajeSite = Number(document.getElementById('VoltajeGeneral').value);
-    let tipoTN = document.getElementById('tonelaje');
-    const cantidadAA = Number(document.getElementById('cantAA').value);
-    if (tipoTN.value === '5TN') {
-        tipoTN = 15;
-    } else if (tipoTN.value === '3TN') {
-        tipoTN = 10
-    };
-    let tipoTNtotal = tipoTN * cantidadAA;
-    const indoor = (1.73 * voltajeSite * tipoTNtotal * 0.85) / 1000;
+    //calculo aireAcondicionado
+    if(potenciaAA.value === 'INDOOR') {
+        const voltajeSite = Number(document.getElementById('VoltajeGeneral').value);
+        let tipoTN = document.getElementById('tonelaje');
+        const cantidadAA = Number(document.getElementById('cantAA').value);
+        if (tipoTN.value === '5TN') {
+            tipoTN = 15;
+        } else if (tipoTN.value === '3TN') {
+            tipoTN = 10
+        };
+        let tipoTNtotal = tipoTN * cantidadAA;
+        const indoor = (1.73 * voltajeSite * tipoTNtotal * 0.85) / 1000;
 
-    //calculo aire Acondicionado monofasico
-    const indoorMono = (voltajeSite * tipoTNtotal) / 1000;
+        //calculo aire Acondicionado monofasico
+        const indoorMono = (voltajeSite * tipoTNtotal) / 1000;
+    }
 
     //potencia rectificador
     const potRect = V*A/1000;
@@ -517,10 +529,13 @@ function potencias3() {
         suma1.push(sumaRectBat); 
         const sumaTotal = outDoor + sumaRectBat;
         suma2.push(sumaTotal);
-        const sumaTotal2 = indoor + sumaRectBat;
-        sumaIndoor.push(sumaTotal2);
-        const sumaTotal3 = indoorMono + sumaRectBat;
-        sumaIndoorMono.push(sumaTotal3);
+        if (potenciaAA.value === 'INDOOR') {
+            const sumaTotal2 = indoor + sumaRectBat;
+            sumaIndoor.push(sumaTotal2);
+            const sumaTotal3 = indoorMono + sumaRectBat;
+            sumaIndoorMono.push(sumaTotal3);
+            console.log(sumaTotal3);
+        }
     };
     //creando los nodos de 6x7
     for (let j = 0; j < 7; j++) {
