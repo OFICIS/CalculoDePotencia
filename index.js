@@ -230,6 +230,7 @@ function potencias1() {
     const potBB = [];
     const suma1 = [];
     const suma2 = [];
+    const suma3 = [];
     const sumaIndoor = [];
     const sumaIndoorMono = [];
 
@@ -257,6 +258,7 @@ function potencias1() {
     //potencia rectificador
     const potRect = V*A/1000;
     const outDoor = 1.3;
+    const UnidadExtractora = 1.1; 
     //potencia de bateria
     for (let i = 10; i >= 4; i--) {
         const porcentaje = `${i}%`
@@ -276,10 +278,15 @@ function potencias1() {
             const sumaTotal3 = indoorMono + sumaRectBat;
             sumaIndoorMono.push(sumaTotal3);
             console.log(sumaTotal3);
+        } else if (potenciaAA.value === 'UNIDAD EXTRACTORA') {
+            const sumaTotal = UnidadExtractora + sumaRectBat;
+            suma3.push(sumaTotal);
+        } else {
+            const sumaTotal = outDoor + sumaRectBat;
+            suma2.push(sumaTotal);
         }
-        
     };
-
+    console.log(suma3);
     //creando los nodos de 6x7
     for (let j = 0; j < 7; j++) {
         for (let i = 0; i < 6; i++) {
@@ -316,6 +323,9 @@ function potencias1() {
                         p.appendChild(pText);
                     }
                     
+                } else if (potenciaAA.value === 'UNIDAD EXTRACTORA'){
+                    const pText = document.createTextNode(UnidadExtractora);
+                    p.appendChild(pText);
                 } else {
                     const pText = document.createTextNode(outDoor);
                     p.appendChild(pText);
@@ -331,6 +341,9 @@ function potencias1() {
                     p.appendChild(pText);
                     }
                     
+                } else if (potenciaAA.value === 'UNIDAD EXTRACTORA'){
+                    const pText = document.createTextNode(suma3[j].toFixed(3));
+                    p.appendChild(pText);
                 } else {
                     const pText = document.createTextNode(suma2[j].toFixed(3));
                     p.appendChild(pText);
@@ -360,6 +373,7 @@ function potencias2() {
     const potBB = [];
     const suma1 = [];
     const suma2 = [];
+    const suma3 = [];
     const sumaIndoor = [];
     const sumaIndoorMono = [];
 
@@ -387,6 +401,7 @@ function potencias2() {
     //potencia rectificador
     const potRect = V*A/1000;
     const outDoor = 1.3;
+    const UnidadExtractora = 1.1;
     //potencia de bateria
     for (let i = 10; i >= 4; i--) {
         const porcentaje = `${i}%`
@@ -406,6 +421,12 @@ function potencias2() {
             const sumaTotal3 = indoorMono + sumaRectBat;
             sumaIndoorMono.push(sumaTotal3);
             console.log(sumaTotal3);
+        } else if (potenciaAA.value === 'UNIDAD EXTRACTORA') {
+            const sumaTotal = UnidadExtractora + sumaRectBat;
+            suma3.push(sumaTotal);
+        } else {
+            const sumaTotal = outDoor + sumaRectBat;
+            suma2.push(sumaTotal);
         }
     };
     //creando los nodos de 6x7
@@ -444,6 +465,9 @@ function potencias2() {
                         p.appendChild(pText);
                     }
                     
+                } else if (potenciaAA.value === 'UNIDAD EXTRACTORA'){
+                    const pText = document.createTextNode(UnidadExtractora);
+                    p.appendChild(pText);
                 } else {
                     const pText = document.createTextNode(outDoor);
                     p.appendChild(pText);
@@ -459,6 +483,9 @@ function potencias2() {
                     p.appendChild(pText);
                     }
                     
+                } else if (potenciaAA.value === 'UNIDAD EXTRACTORA'){
+                    const pText = document.createTextNode(suma3[j].toFixed(3));
+                    p.appendChild(pText);
                 } else {
                     const pText = document.createTextNode(suma2[j].toFixed(3));
                     p.appendChild(pText);
@@ -489,6 +516,7 @@ function potencias3() {
     const potBB = [];
     const suma1 = [];
     const suma2 = [];
+    const suma3 = [];
     const sumaIndoor = [];
     const sumaIndoorMono = [];
 
@@ -515,7 +543,7 @@ function potencias3() {
     //potencia rectificador
     const potRect = V*A/1000;
     const outDoor = 1.3;
-
+    const UnidadExtractora = 1.1;
     //potencia de bateria
     for (let i = 10; i >= 4; i--) {
         const porcentaje = `${i}%`
@@ -527,14 +555,19 @@ function potencias3() {
         potBB.push(result3);
         const sumaRectBat = (potRect + result3);
         suma1.push(sumaRectBat); 
-        const sumaTotal = outDoor + sumaRectBat;
-        suma2.push(sumaTotal);
+        
         if (potenciaAA.value === 'INDOOR') {
             const sumaTotal2 = indoor + sumaRectBat;
             sumaIndoor.push(sumaTotal2);
             const sumaTotal3 = indoorMono + sumaRectBat;
             sumaIndoorMono.push(sumaTotal3);
             console.log(sumaTotal3);
+        } else if (potenciaAA.value === 'UNIDAD EXTRACTORA') {
+            const sumaTotal = UnidadExtractora + sumaRectBat;
+            suma3.push(sumaTotal);
+        } else {
+            const sumaTotal = outDoor + sumaRectBat;
+            suma2.push(sumaTotal);
         }
     };
     //creando los nodos de 6x7
@@ -573,6 +606,9 @@ function potencias3() {
                         p.appendChild(pText);
                     }
                     
+                } else if (potenciaAA.value === 'UNIDAD EXTRACTORA'){
+                    const pText = document.createTextNode(UnidadExtractora);
+                    p.appendChild(pText);
                 } else {
                     const pText = document.createTextNode(outDoor);
                     p.appendChild(pText);
@@ -588,6 +624,9 @@ function potencias3() {
                     p.appendChild(pText);
                     }
                     
+                } else if (potenciaAA.value === 'UNIDAD EXTRACTORA'){
+                    const pText = document.createTextNode(suma3[j].toFixed(3));
+                    p.appendChild(pText);
                 } else {
                     const pText = document.createTextNode(suma2[j].toFixed(3));
                     p.appendChild(pText);
