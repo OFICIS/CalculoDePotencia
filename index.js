@@ -245,15 +245,15 @@ function potencias1() {
             tipoTN = 10
         };
         let tipoTNtotal = tipoTN * cantidadAA;
-        const indoor = (1.73 * voltajeSite * tipoTNtotal * 0.85) / 1000;
-
+        var indoor = (1.73 * voltajeSite * tipoTNtotal * 0.85) / 1000;
+        
         //calculo aire Acondicionado monofasico
-        const indoorMono = (voltajeSite * tipoTNtotal) / 1000;
+        var indoorMono = (voltajeSite * tipoTNtotal) / 1000;
     }
 
     //modulos capacidad 
     const result0 = (((NB*C)*10)/100 + CF)*V / 1000;
-    texto2.innerHTML = `La Potencia de modulos es ${result0.toFixed(3)}` + '<br>'; 
+    texto2.innerHTML = `La Potencia de modulos es ${result0.toFixed(3)}` + '<br>';
 
     //potencia rectificador
     const potRect = V*A/1000;
@@ -391,10 +391,10 @@ function potencias2() {
             tipoTN = 10
         };
         let tipoTNtotal = tipoTN * cantidadAA;
-        const indoor = (1.73 * voltajeSite * tipoTNtotal * 0.85) / 1000;
+        var indoor = (1.73 * voltajeSite * tipoTNtotal * 0.85) / 1000;
 
         //calculo aire Acondicionado monofasico
-        const indoorMono = (voltajeSite * tipoTNtotal) / 1000;
+        var indoorMono = (voltajeSite * tipoTNtotal) / 1000;
     }
     
 
@@ -534,10 +534,10 @@ function potencias3() {
             tipoTN = 10
         };
         let tipoTNtotal = tipoTN * cantidadAA;
-        const indoor = (1.73 * voltajeSite * tipoTNtotal * 0.85) / 1000;
+        var indoor = (1.73 * voltajeSite * tipoTNtotal * 0.85) / 1000;
 
         //calculo aire Acondicionado monofasico
-        const indoorMono = (voltajeSite * tipoTNtotal) / 1000;
+        var indoorMono = (voltajeSite * tipoTNtotal) / 1000;
     }
 
     //potencia rectificador
