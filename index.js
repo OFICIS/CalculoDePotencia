@@ -9,6 +9,7 @@ let boleano = true;
     <option value="220"></option>
     <option value="380"></option>
 </datalist>*/
+
 function createInput(textLabel, forLabelIdInput) {
     const label0 = document.createElement('label'); 
     const textLabel0 = document.createTextNode(`${textLabel}`);
